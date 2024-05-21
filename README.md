@@ -45,25 +45,30 @@ https://github.com/FokkerYe/docker_installation_bath_script.git
     ```yaml
     version: '3.7'
 
-    services:
-      prometheus:
-        image: prom/prometheus:latest
-        volumes:
-          - ./prometheus.yml:/etc/prometheus/prometheus.yml
-        ports:
-          - "9090:9090"
-
-      grafana:
-        image: grafana/grafana:latest
-        ports:
-          - "3000:3000"
-        environment:
-          - GF_SECURITY_ADMIN_PASSWORD=admin
-        volumes:
-          - grafana-storage:/var/lib/grafana
-
+services:
+  prometheus:
+    image: prom/prometheus:latest
     volumes:
-      grafana-storage:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    ports:
+      - "9100:9100"
+
+volumes:
+  grafana-storage:
     ```
 
 ### Step 4: Configure Prometheus
@@ -79,13 +84,17 @@ https://github.com/FokkerYe/docker_installation_bath_script.git
     Open the file with your preferred text editor and add the following content:
 
     ```yaml
-    global:
-      scrape_interval: 15s
+   global:
+  scrape_interval: 15s
 
-    scrape_configs:
-      - job_name: 'prometheus'
-        static_configs:
-          - targets: ['localhost:9090']
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['192.168.205.22:9090']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
     ```
 
 ### Step 5: Start Services
