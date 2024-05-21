@@ -42,7 +42,8 @@ https://github.com/FokkerYe/docker_installation_bath_script.git
 
     Open the file with your preferred text editor and add the following content:
 
-    ```
+```
+
     version: '3.7'
 
 services:
@@ -69,7 +70,8 @@ services:
 
 volumes:
   grafana-storage:
-    ```
+  
+ ```
 
 ### Step 4: Configure Prometheus
 
@@ -82,8 +84,7 @@ volumes:
 2. **Edit the `prometheus.yml` File**:
 
     Open the file with your preferred text editor and add the following content:
-
-    ```yaml
+```
    global:
   scrape_interval: 15s
 
@@ -95,7 +96,7 @@ scrape_configs:
   - job_name: 'node-exporter'
     static_configs:
       - targets: ['node-exporter:9100']
-    ```
+```
 
 ### Step 5: Start Services
 
