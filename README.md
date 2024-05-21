@@ -42,7 +42,7 @@ https://github.com/FokkerYe/docker_installation_bath_script.git
 
     Open the file with your preferred text editor and add the following content:
 
-    ```yaml
+    ```
     version: '3.7'
 
 services:
