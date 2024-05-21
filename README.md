@@ -12,7 +12,7 @@ Before starting, ensure that Docker and Docker Compose are installed on your sys
 
 ```
 https://github.com/FokkerYe/docker_installation_bath_script.git
-``
+```
 
 3. **Verify Installations**:
 
